@@ -32,6 +32,7 @@ jobs:
         with:
           input_file: 'test_demo.md'
           output_file: 'output_docs/demo_result.pdf'
+          css_file: '.github/assets/styles.css'
 
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
@@ -39,3 +40,17 @@ jobs:
           name: generated-pdf-demo
           path: output_docs/demo_result.pdf
           retention-days: 5
+
+      - name: Commit Generated PDF
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f docs/README.pdf
+          
+          if ! git diff-index --quiet HEAD docs/README.pdf; then
+            git commit -m "docs: auto-generate PDF from README"
+            git push
+          else
+            echo "No changes detected. Skipping commit."
+          fi
+

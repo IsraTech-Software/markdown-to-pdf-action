@@ -6,6 +6,11 @@ An asynchronous, cloud-native GitHub Action that converts Markdown documents int
 
 This action is entirely containerized, meaning it requires zero system-level dependencies or setup in the consuming repositories. It supports custom CSS, corporate logo injection, LaTeX/MathJax rendering, and automated page formatting.
 
+## Demo
+
+- A demo css file can be found [here](.github/assets/styles.css)
+- A demo generated PDF file can be found [here](docs/README.pdf)
+
 ## ✨ Features
 
 - Zero Configuration: Runs completely standalone via Docker; no Python or Node.js environment setup required in your workflows.

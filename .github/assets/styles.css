@@ -1,0 +1,189 @@
+/* Custom CSS for Markdown to PDF Converter */
+/* Modern Corporate with Full-Bleed Blue Header */
+
+@page {
+    size: A4;
+    margin: 20mm 20mm 25mm 20mm;
+    background-color: #ffffff;
+
+    @bottom-left {
+        /*content: "Analysis Report - Legal & Compliance";*/
+        font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 8pt;
+        color: #7f8c8d;
+        border-top: 1px solid #eaeaea;
+        padding-top: 5px;
+    }
+
+    @bottom-right {
+        /*content: "Page " counter(page) " of " counter(pages);*/
+        font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 8pt;
+        color: #7f8c8d;
+        border-top: 1px solid #eaeaea;
+        padding-top: 5px;
+    }
+}
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333333;
+    font-size: 11pt;
+    line-height: 1.6;
+    background-color: #ffffff;
+    /* Ensure no hidden body margins cause white lines */
+    margin: 0; 
+}
+
+/* --- FULL-BLEED BLUE TITLE BANNER --- */
+h1 {
+    background-color: #2b74cb; 
+    color: #ffffff;
+    margin-top: -25mm;
+    margin-left: -25mm; 
+    margin-right: -25mm;
+    margin-bottom: -1px; 
+    padding: 25mm 25mm 5px 25mm; 
+    font-size: 26pt;
+    font-weight: 700; 
+    text-align: left;
+    border: none;
+}
+
+h1 + p {
+    background-color: #2b74cb;
+    color: #ffffff;
+    margin-top: 0; 
+    margin-left: -25mm;
+    margin-right: -25mm;
+    margin-bottom: 15px; 
+    padding: 1px 25mm 15mm 25mm; 
+    font-size: 13pt;
+    font-weight: 400; 
+    border: none;
+}
+
+h2 {
+    color: #2b74cb;
+    font-size: 16pt;
+    font-weight: 700;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #2b74cb;
+    padding-bottom: 5px;
+    page-break-after: avoid;
+}
+
+h3 {
+    color: #2d3748;
+    font-size: 13pt;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    page-break-after: avoid;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+ul, ol {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 30px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+img[alt="Block Math"] {
+    height: auto !important; 
+    max-height: 3em;
+}
+
+blockquote {
+    margin: 20px 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    page-break-inside: avoid;
+}
+
+blockquote p, blockquote.info {
+    background-color: #f2f5f9;
+    border-left: 4px solid #2b74cb;
+    padding: 15px 20px;
+    margin: 0;
+    font-style: normal;
+    color: #2d3748;
+}
+
+blockquote.warning, blockquote.warning p {
+    background-color: #fffdf2;
+    border-left-color: #d4ac0d;
+}
+
+blockquote.error, blockquote.error p {
+    background-color: #fdebeb; 
+    border-left-color: #b8312f; 
+}
+
+blockquote strong {
+    color: #1a202c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 10.5pt;
+    page-break-inside: avoid;
+}
+
+th {
+    background-color: #ebf8ff;
+    color: #2b74cb;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #cbd5e0;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #4a5568;
+}
+
+tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    background-color: #edf2f7;
+    color: #c53030;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 9.5pt;
+}
+
+pre {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    padding: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
