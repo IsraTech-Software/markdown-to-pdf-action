@@ -1,0 +1,39 @@
+name: 'Markdown to PDF Converter'
+description: 'Asynchronously converts Markdown documents to styled PDFs using WeasyPrint.'
+author: 'Your Organization'
+
+branding:
+  icon: 'file-text'
+  color: 'blue'
+
+inputs:
+  input_file:
+    description: 'Path to the input Markdown file (relative to repository root)'
+    required: true
+    default: 'README.md'
+  output_file:
+    description: 'Path to the output PDF file (relative to repository root)'
+    required: true
+    default: 'docs/README.pdf'
+  logo_file:
+    description: 'Optional: Path to a custom logo image'
+    required: false
+    default: ''
+  css_file:
+    description: 'Optional: Path to a custom CSS stylesheet'
+    required: false
+    default: ''
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  # GitHub maps these arguments directly to the Docker container's ENTRYPOINT
+  args:
+    - '-i'
+    - ${{ inputs.input_file }}
+    - '-o'
+    - ${{ inputs.output_file }}
+    - '-l'
+    - ${{ inputs.logo_file }}
+    - '-s'
+    - ${{ inputs.css_file }}

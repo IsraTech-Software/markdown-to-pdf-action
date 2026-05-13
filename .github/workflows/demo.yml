@@ -1,0 +1,41 @@
+name: Action Demonstration & Verification
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test-action:
+    name: Run PDF Generator Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Action Code
+        uses: actions/checkout@v4
+
+      - name: Create Dummy Markdown File
+        run: |
+          echo "# Action Demo Document" > test_demo.md
+          echo "This file was automatically generated to test the Action pipeline." >> test_demo.md
+          echo "## Math Example" >> test_demo.md
+          echo "Here is an inline equation: \$E=mc^2\$." >> test_demo.md
+          echo "And a block equation:" >> test_demo.md
+          echo "\$\$" >> test_demo.md
+          echo "\int_0^\infty x^2 dx" >> test_demo.md
+          echo "\$\$" >> test_demo.md
+          
+          mkdir -p output_docs
+
+      - name: Execute Markdown to PDF Action
+        uses: ./
+        with:
+          input_file: 'test_demo.md'
+          output_file: 'output_docs/demo_result.pdf'
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-pdf-demo
+          path: output_docs/demo_result.pdf
+          retention-days: 5
