@@ -43,11 +43,12 @@ on:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
       - name: Create Docs Directory
         run: mkdir -p docs
 
       - name: Convert README to PDF
-        uses: your-org-name/markdown-to-pdf-action@v1
+        uses: IsraTech-Software/markdown-to-pdf-action@v1
         with:
           input_file: 'README.md'
           output_file: 'docs/README.pdf'
