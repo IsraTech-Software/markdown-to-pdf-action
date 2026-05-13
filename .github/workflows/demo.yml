@@ -24,21 +24,22 @@ jobs:
           echo "\$\$" >> test_demo.md
           echo "\int_0^\infty x^2 dx" >> test_demo.md
           echo "\$\$" >> test_demo.md
-          
-          mkdir -p output_docs
+
+      - name: Create Docs Directory
+        run: mkdir -p docs
 
       - name: Execute Markdown to PDF Action
         uses: ./
         with:
           input_file: 'test_demo.md'
-          output_file: 'output_docs/demo_result.pdf'
+          output_file: 'docs/README.pdf'
           css_file: '.github/assets/styles.css'
 
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
           name: generated-pdf-demo
-          path: output_docs/demo_result.pdf
+          path: docs/README.pdf
           retention-days: 5
 
       - name: Commit Generated PDF
