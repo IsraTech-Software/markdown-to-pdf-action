@@ -271,7 +271,7 @@ class WeasyPrintMarkdownRenderer(DocumentRenderer):
         """
         base_dir = os.path.abspath(os.path.dirname(input_path))
         def _render_sync():
-            HTML(string=html, base_url=base_dir).write_pdf(output_file_path)
+            HTML(string=html_payload, base_url=base_dir).write_pdf(output_path)
             
         try:
             await asyncio.to_thread(_render_sync)
