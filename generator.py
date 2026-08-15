@@ -89,7 +89,7 @@ class WeasyPrintMarkdownRenderer(DocumentRenderer):
         """
         md_text: str = await self._read_text_async(input_path)
         html_payload: str = await self._build_html_async(md_text)
-        await self._write_pdf_async(html_payload, output_path)
+        await self._write_pdf_async(html_payload, input_path, output_path)
 
     async def _read_text_async(self, file_path: str) -> str:
         """
@@ -264,13 +264,14 @@ class WeasyPrintMarkdownRenderer(DocumentRenderer):
         </html>
         """
 
-    async def _write_pdf_async(self, html_payload: str, output_path: str) -> None:
+    async def _write_pdf_async(self, html_payload: str, input_path: str, output_path: str) -> None:
         """
         Executes CPU-bound WeasyPrint generation on a separate thread.
         {P: html_payload is complete} C {Q: File is flushed to disk}
         """
+        base_dir = os.path.abspath(os.path.dirname(input_path))
         def _render_sync():
-            HTML(string=html_payload).write_pdf(output_path)
+            HTML(string=html, base_url=base_dir).write_pdf(output_file_path)
             
         try:
             await asyncio.to_thread(_render_sync)
