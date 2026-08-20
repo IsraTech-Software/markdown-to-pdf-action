@@ -52,24 +52,33 @@ on:
       - name: Create Docs Directory
         run: mkdir -p docs
 
+      - name: Check for document changes
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            docs_changed:
+              - 'README.md'
+              - '.github/assets/company-logo.png'
+              - '.github/assets/styles.css'
+
       - name: Convert README to PDF
-        uses: IsraTech-Software/markdown-to-pdf-action@v1
+        if: steps.filter.outputs.docs_changed == 'true'
+        uses: Isratech-Software/markdown-to-pdf-action@v1
         with:
           input_file: 'README.md'
           output_file: 'docs/README.pdf'
+          logo_file: '.github/assets/logo.png'
+          css_file: '.github/assets/styles.css'
 
       - name: Commit Generated PDF
+        if: steps.filter.outputs.docs_changed == 'true'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/README.pdf
-      
-          if ! git diff-index --quiet HEAD docs/README.pdf; then
-            git commit -m "docs: auto-generate PDF from README"
-            git push
-          else
-            echo "No changes detected. Skipping commit."
-          fi
+          git add -f docs/README.pdf
+          git commit -m "docs: auto-generate PDF from README"
+          git push
 ```
 
 ### Advanced Example (With Styling)
@@ -82,8 +91,8 @@ If you have a corporate stylesheet or logo stored within the consuming repositor
   with:
     input_file: 'docs/SPECIFICATION.md'
     output_file: 'docs/releases/SPECIFICATION_v2.pdf'
-    logo_file: '.github/assets/company-logo.png'
-    css_file: '.github/assets/pdf-theme.css'
+    logo_file: '.github/assets/logo.png'
+    css_file: '.github/assets/styles.css'
 ```
 
 ## ⚙️ Inputs
