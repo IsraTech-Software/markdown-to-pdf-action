@@ -4,6 +4,8 @@
 
 An asynchronous, cloud-native GitHub Action that converts Markdown documents into beautifully styled, corporate-ready PDFs using WeasyPrint.
 
+> A standalone CLI version of this tool, along with CSS and Markdown example files, can be found [here](https://github.com/IsraTech-Software/Markdown-PDF-Generator/). 
+
 This action is entirely containerized, meaning it requires zero system-level dependencies or setup in the consuming repositories. It supports custom CSS, corporate logo injection, LaTeX/MathJax rendering, and automated page formatting.
 
 ## Demo
